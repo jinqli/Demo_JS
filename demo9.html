@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>防抖和节流</title>
+  </head>
+  <body>
+    <input type="text" name="" id="" />
+    <script>
+      let inp = document.querySelector("input");
+      // 防抖：用户出发事件过于频繁、只要最后一次事件的操作 可以利用计时器实现
+      inp.oninput = debounce(function () {
+        console.log(this.value);
+      }, 500);
+
+      // 进行封装
+      function debounce(callback, delay) {
+        let t = null;
+        // 返回值是一个函数
+        return function () {
+          // 判断
+          if (t !== null) {
+            clearTimeout(t);
+          }
+          t = setTimeout(() => {
+            // 此处的this指向windoe
+            callback.call(this);
+          }, delay);
+        };
+      }
+    </script>
+  </body>
+</html>
